@@ -1,0 +1,12 @@
+identifier: ebyte_e73
+name: EBYTE E73
+type: mcu
+arch: arm
+toolchain:
+  - zephyr
+  - gnuarmemb
+  - xtools
+ram: 64
+flash: 512
+supported:
+  - pwm

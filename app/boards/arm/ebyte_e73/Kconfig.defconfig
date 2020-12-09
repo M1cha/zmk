@@ -1,0 +1,14 @@
+# EBYTE E73 board configuration
+
+# Copyright (c) 2018 makerdiary.com.
+# SPDX-License-Identifier: Apache-2.0
+
+if BOARD_EBYTE_E73
+
+config BOARD
+	default "ebyte_e73"
+
+config BT_CTLR
+	default BT
+
+endif # BOARD_EBYTE_E73
