@@ -1,8 +1,8 @@
-# nRF52832-MDK board configuration
+# EBYTE E73 board configuration
 
 # Copyright (c) 2018 makerdiary.com.
 # SPDX-License-Identifier: Apache-2.0
 
-config BOARD_NRF52832_MDK
-	bool "nRF52832-MDK"
+config BOARD_EBYTE_E73
+	bool "EBYTE E73"
 	depends on SOC_NRF52832_QFAA

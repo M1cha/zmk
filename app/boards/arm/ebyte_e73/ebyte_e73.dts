@@ -9,8 +9,8 @@
 #include <nordic/nrf52832_qfaa.dtsi>
 
 / {
-	model = "nRF52832-MDK Micro Dev Kit";
-	compatible = "nrf52832-mdk";
+	model = "EBYTE E73";
+	compatible = "ebyte-e73";
 
 	chosen {
 		zephyr,console = &uart0;

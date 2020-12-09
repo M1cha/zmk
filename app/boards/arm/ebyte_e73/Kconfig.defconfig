@@ -1,14 +1,14 @@
-# nRF52832-MDK board configuration
+# EBYTE E73 board configuration
 
 # Copyright (c) 2018 makerdiary.com.
 # SPDX-License-Identifier: Apache-2.0
 
-if BOARD_NRF52832_MDK
+if BOARD_EBYTE_E73
 
 config BOARD
-	default "nrf52832_mdk"
+	default "ebyte_e73"
 
 config BT_CTLR
 	default BT
 
-endif # BOARD_NRF52832_MDK
+endif # BOARD_EBYTE_E73

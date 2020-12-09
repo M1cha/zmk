@@ -1,5 +1,5 @@
-identifier: nrf52832_mdk
-name: nRF52832-MDK
+identifier: ebyte_e73
+name: EBYTE E73
 type: mcu
 arch: arm
 toolchain:
