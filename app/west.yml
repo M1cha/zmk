@@ -38,4 +38,4 @@ manifest:
       path: tools/uf2
       clone-depth: 1
   self:
-    west-commands: scripts/west-commands.yml
+    west-commands: app/scripts/west-commands.yml
