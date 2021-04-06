@@ -14,7 +14,7 @@ list(APPEND ZEPHYR_EXTRA_MODULES
 include(cmake/zmk_config.cmake)
 
 # Find Zephyr. This also loads Zephyr's build system.
-find_package(Zephyr REQUIRED HINTS ../zephyr)
+find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(zmk)
 
 zephyr_linker_sources(RODATA include/linker/zmk-events.ld)
