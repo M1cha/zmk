@@ -76,6 +76,7 @@ foreach(root ${BOARD_ROOT})
 		    PATHS ${root}/boards/shields/*
 		    NO_DEFAULT_PATH
 		    )
+        message(${root}/boards/shields/*)
 		foreach(shield_path ${shields_refs_list})
 			get_filename_component(SHIELD_DIR ${shield_path} NAME)
 			list(APPEND KEYMAP_DIRS ${shield_path})
@@ -129,6 +130,7 @@ endif()
 
 
 if(NOT KEYMAP_FILE)
+    message(${KEYMAP_DIRS})
 	foreach(keymap_dir ${KEYMAP_DIRS})
 		foreach(keymap_prefix ${SHIELD} ${SHIELD_DIR} ${BOARD} ${BOARD_DIR})
 			if (EXISTS ${keymap_dir}/${keymap_prefix}.keymap)
