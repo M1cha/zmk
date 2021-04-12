@@ -9,6 +9,7 @@
 #include <zmk/keys.h>
 #include <zmk/ble/profile.h>
 
+void zmk_ble_wakeup(void);
 int zmk_ble_clear_bonds();
 int zmk_ble_prof_next();
 int zmk_ble_prof_prev();

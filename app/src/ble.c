@@ -165,7 +165,21 @@ bool zmk_ble_active_profile_is_connected() {
         LOG_ERR("Advertising failed to start (err %d)", err);                                      \
         return err;                                                                                \
     }                                                                                              \
-    advertising_status = ZMK_ADV_CONN;
+    advertising_status = ZMK_ADV_CONN;                                                             \
+    adv_timeout_start();
+
+static struct k_delayed_work adv_timeout_work;
+static bool adv_stopped_by_timeout = false;
+
+static void adv_timeout_handler(struct k_work *work) {
+    bt_le_adv_stop();
+    advertising_status = ZMK_ADV_NONE;
+    adv_stopped_by_timeout = true;
+}
+
+static void adv_timeout_start(void) {
+    k_delayed_work_submit(&adv_timeout_work, K_MINUTES(1));
+}
 
 int update_advertising() {
     int err = 0;
@@ -186,6 +200,9 @@ int update_advertising() {
         // desired_adv = ZMK_ADV_DIR;
     }
     LOG_DBG("advertising from %d to %d", advertising_status, desired_adv);
+
+    k_delayed_work_cancel(&adv_timeout_work);
+    adv_stopped_by_timeout = false;
 
     switch (desired_adv + CURR_ADV(advertising_status)) {
     case ZMK_ADV_NONE + CURR_ADV(ZMK_ADV_DIR):
@@ -211,6 +228,12 @@ int update_advertising() {
 
     return 0;
 };
+
+void zmk_ble_wakeup(void) {
+    if (adv_stopped_by_timeout) {
+        update_advertising();
+    }
+}
 
 static void update_advertising_callback(struct k_work *work) { update_advertising(); }
 
@@ -544,6 +567,8 @@ static void zmk_ble_ready(int err) {
 }
 
 static int zmk_ble_init(const struct device *_arg) {
+    k_delayed_work_init(&adv_timeout_work, adv_timeout_handler);
+
     int err = bt_enable(NULL);
 
     if (err) {

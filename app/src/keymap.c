@@ -19,6 +19,10 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/events/layer_state_changed.h>
 #include <zmk/events/sensor_event.h>
 
+#ifdef CONFIG_ZMK_BLE
+#include <zmk/ble.h>
+#endif
+
 static zmk_keymap_layers_state_t _zmk_keymap_layer_state = 0;
 static uint8_t _zmk_keymap_layer_default = 0;
 
@@ -180,6 +184,9 @@ int zmk_keymap_apply_position_state(int layer, uint32_t position, bool pressed, 
     }
 
     if (pressed) {
+#ifdef CONFIG_ZMK_BLE
+        zmk_ble_wakeup();
+#endif
         return behavior_keymap_binding_pressed(&binding, event);
     } else {
         return behavior_keymap_binding_released(&binding, event);
